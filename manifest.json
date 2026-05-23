@@ -3,6 +3,7 @@
   "name": "waigdt",
   "version": "1.0",
   "description": "What am I getting done today",
+  "permissions": ["storage"],
   "chrome_url_overrides": {
     "newtab": "index.html"
   }

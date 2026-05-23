@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-  <style>
-    body {
-  background-color: #ffffff;
-  /* Creates a 1px dark-gray dot that fades to transparent */
-  background-image: radial-gradient(#c4c4c4 1px, transparent 1px);
-  /* Controls the spacing/density of the grid (24px apart) */
-  background-size: 40px 40px;}
-  </style>
-  <head>
-    <title>waigdt</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <h1>waigdt</h1>
-    <script src="app.js"></script>
-  </body>
+<head>
+  <title>waigdt</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container" id="container">
+  <div class="input-wrapper">
+    <input class="input-box" type="text" placeholder="WAIGDT?" id="taskInput" autocomplete="off" />
+  </div>
+  <div class="tasks" id="taskList"></div>
+  <span class="hint">press enter to add a task</span>
+</div>
+
+<script src="app.js"></script>
+</body>
 </html>
