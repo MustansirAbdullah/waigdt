@@ -80,7 +80,6 @@ function createTask(text, done = false) {
 
     // If completed, count it towards history before removing
     if (wasCompleted) {
-      // already counted when checkbox was ticked, no double count needed
     }
 
     task.style.opacity = '0';

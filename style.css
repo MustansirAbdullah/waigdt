@@ -11,6 +11,9 @@
 
 body {
   min-height: 100vh;
+  background-color: #ffffff;
+  background-image: radial-gradient(#c4c4c4 1px, transparent 1px);
+  background-size: 40px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,17 +22,7 @@ body {
   overflow-y: auto;
 }
 
-.bg {
-  position: fixed;
-  inset: 0;
-  background-color: #ffffff;
-  background-image: radial-gradient(#c4c4c4 1px, transparent 1px);
-  background-size: 40px 40px;
-  z-index: -1;
-  transition: background-color 0.3s;
-}
-
-body.dark .bg {
+body.dark {
   background-color: #111;
   background-image: radial-gradient(#333 1px, transparent 1px);
 }
@@ -53,10 +46,8 @@ body.dark .bg {
   font-size: 2.6rem;
   font-family: 'Delius', cursive;
   color: #222;
-  background: rgba(255,255,255,0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 2px solid rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.92);
+  border: 2px solid #ddd;
   border-radius: 6px;
   outline: none;
   white-space: nowrap;
@@ -71,7 +62,7 @@ body.dark .bg {
 }
 
 .input-box:focus {
-  border-color: rgba(255,255,255,0.95);
+  border-color: #aaa;
   box-shadow: 0 4px 40px rgba(0,0,0,0.1);
 }
 
@@ -84,10 +75,8 @@ body.dark .bg {
 }
 
 body.dark .input-box {
-  background: rgba(30,30,30,0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-color: rgba(255,255,255,0.08);
+  background: rgba(30,30,30,0.95);
+  border-color: #333;
   color: #eee;
 }
 
@@ -96,7 +85,7 @@ body.dark .input-box::placeholder {
 }
 
 body.dark .input-box:focus {
-  border-color: rgba(255,255,255,0.15);
+  border-color: #555;
 }
 
 .tasks {
@@ -110,11 +99,9 @@ body.dark .input-box:focus {
   align-items: center;
   gap: 16px;
   padding: 16px 24px;
-  background: rgba(255,255,255,0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 2px solid rgba(255,255,255,0.8);
-  border-top: 1px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.92);
+  border: 2px solid #ddd;
+  border-top: 1px solid #eee;
   animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   transition: background 0.2s;
   position: relative;
@@ -122,21 +109,21 @@ body.dark .input-box:focus {
 
 .task:last-child {
   border-radius: 0 0 6px 6px;
-  border-bottom: 2px solid rgba(255,255,255,0.8);
+  border-bottom: 2px solid #ddd;
 }
 
 body.dark .task {
-  background: rgba(30,30,30,0.6);
-  border-color: rgba(255,255,255,0.08);
-  border-top-color: rgba(255,255,255,0.04);
+  background: rgba(30,30,30,0.95);
+  border-color: #333;
+  border-top-color: #222;
 }
 
 body.dark .task:last-child {
-  border-bottom-color: rgba(255,255,255,0.08);
+  border-bottom-color: #333;
 }
 
 body.dark .task.done {
-  background: rgba(20,20,20,0.6);
+  background: rgba(20,20,20,0.95);
 }
 
 @keyframes slideIn {
@@ -216,7 +203,7 @@ body.dark .task.done label {
 }
 
 .task.done {
-  background: rgba(248,248,248,0.5);
+  background: rgba(248,248,248,0.92);
 }
 
 /* Delete button */
@@ -250,6 +237,20 @@ body.dark .delete-btn:hover {
   color: #e74c3c;
 }
 
+/* Expired tasks */
+.task.expired {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.task.expired input[type="checkbox"] {
+  cursor: not-allowed;
+}
+
+.task.expired label {
+  cursor: not-allowed;
+}
+
 .hint {
   margin-top: 14px;
   font-size: 0.8rem;
@@ -272,10 +273,8 @@ body.dark .hint {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  background: rgba(255,255,255,0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(255,255,255,0.8);
+  background: none;
+  border: 1.5px solid #ddd;
   border-radius: 50%;
   width: 42px;
   height: 42px;
@@ -292,8 +291,7 @@ body.dark .hint {
 }
 
 body.dark .theme-toggle {
-  background: rgba(30,30,30,0.6);
-  border-color: rgba(255,255,255,0.08);
+  border-color: #444;
   color: #eee;
 }
 
