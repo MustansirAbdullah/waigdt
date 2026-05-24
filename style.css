@@ -15,7 +15,7 @@ body {
   align-items: center;
   justify-content: center;
   font-family:  'Delius', cursive;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .container {
