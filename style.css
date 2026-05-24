@@ -5,6 +5,10 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+.no-transition * {
+  transition: none !important;
+}
+
 body {
   min-height: 100vh;
   background-color: #ffffff;
@@ -14,8 +18,13 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family:  'Delius', cursive;
+  font-family: 'Delius', cursive;
   overflow-y: auto;
+}
+
+body.dark {
+  background-color: #111;
+  background-image: radial-gradient(#333 1px, transparent 1px);
 }
 
 .container {
@@ -35,7 +44,7 @@ body {
   width: 100%;
   padding: 36px 36px;
   font-size: 2.6rem;
-  font-family:  'Delius', cursive;
+  font-family: 'Delius', cursive;
   color: #222;
   background: rgba(255,255,255,0.92);
   border: 2px solid #ddd;
@@ -65,6 +74,20 @@ body {
   box-shadow: none;
 }
 
+body.dark .input-box {
+  background: rgba(30,30,30,0.95);
+  border-color: #333;
+  color: #eee;
+}
+
+body.dark .input-box::placeholder {
+  color: #555;
+}
+
+body.dark .input-box:focus {
+  border-color: #555;
+}
+
 .tasks {
   width: 100%;
   display: flex;
@@ -86,6 +109,20 @@ body {
 .task:last-child {
   border-radius: 0 0 6px 6px;
   border-bottom: 2px solid #ddd;
+}
+
+body.dark .task {
+  background: rgba(30,30,30,0.95);
+  border-color: #333;
+  border-top-color: #222;
+}
+
+body.dark .task:last-child {
+  border-bottom-color: #333;
+}
+
+body.dark .task.done {
+  background: rgba(20,20,20,0.95);
 }
 
 @keyframes slideIn {
@@ -129,18 +166,39 @@ body {
   transform: rotate(45deg);
 }
 
+body.dark .task input[type="checkbox"] {
+  border-color: #555;
+}
+
+body.dark .task input[type="checkbox"]:checked {
+  background: #eee;
+  border-color: #eee;
+}
+
+body.dark .task input[type="checkbox"]:checked::after {
+  border-color: #111;
+}
+
 .task label {
   font-size: 1.05rem;
   color: #222;
-  font-family:  'Delius', cursive;
+  font-family: 'Delius', cursive;
   cursor: pointer;
   transition: all 0.3s;
   flex: 1;
 }
 
+body.dark .task label {
+  color: #eee;
+}
+
 .task.done label {
   text-decoration: line-through;
   color: #bbb;
+}
+
+body.dark .task.done label {
+  color: #555;
 }
 
 .task.done {
@@ -155,8 +213,42 @@ body {
   transition: opacity 0.3s;
 }
 
+body.dark .hint {
+  color: #444;
+}
+
 .container.has-tasks .hint {
   opacity: 0;
   pointer-events: none;
   margin-top: 0;
+}
+
+.theme-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: none;
+  border: 1.5px solid #ddd;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #222;
+  transition: all 0.3s;
+}
+
+.theme-toggle:hover {
+  border-color: #aaa;
+}
+
+body.dark .theme-toggle {
+  border-color: #444;
+  color: #eee;
+}
+
+body.dark .theme-toggle:hover {
+  border-color: #888;
 }

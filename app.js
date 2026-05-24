@@ -1,13 +1,14 @@
 const input = document.getElementById('taskInput');
 const taskList = document.getElementById('taskList');
 const container = document.getElementById('container');
+const themeToggle = document.getElementById('themeToggle');
+const moonSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>`;
+const sunSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
 
-// Get today's date as a string e.g. "2024-05-24"
 function getToday() {
   return new Date().toISOString().split('T')[0];
 }
 
-// Save all current tasks to storage
 function saveTasks() {
   const tasks = [];
   document.querySelectorAll('.task').forEach(task => {
@@ -19,14 +20,11 @@ function saveTasks() {
   chrome.storage.sync.set({ tasks });
 }
 
-// Archive expired tasks into history log
 function archiveTasks(tasks, date) {
   chrome.storage.sync.get(['history'], (result) => {
     const history = result.history || [];
     const total = tasks.length;
     const completed = tasks.filter(t => t.done).length;
-
-    // Only log if there were actual tasks that day
     if (total > 0) {
       history.push({
         date,
@@ -40,7 +38,6 @@ function archiveTasks(tasks, date) {
   });
 }
 
-// Create a task element and append it
 function createTask(text, done = false) {
   const task = document.createElement('div');
   task.className = 'task' + (done ? ' done' : '');
@@ -66,21 +63,32 @@ function createTask(text, done = false) {
   taskList.appendChild(task);
 }
 
-// Load tasks on page open, check for expiry
-chrome.storage.sync.get(['tasks', 'todayDate'], (result) => {
+// Load everything on page open
+document.body.classList.add('no-transition');
+
+chrome.storage.sync.get(['tasks', 'todayDate', 'theme'], (result) => {
   const saved = result.tasks || [];
   const savedDate = result.todayDate || null;
   const today = getToday();
 
   if (savedDate && savedDate !== today) {
-    // Day has changed — archive and clear
     archiveTasks(saved, savedDate);
     chrome.storage.sync.set({ tasks: [], todayDate: null });
   } else if (saved.length > 0) {
-    // Same day — load tasks normally
     container.classList.add('has-tasks');
     saved.forEach(t => createTask(t.text, t.done));
   }
+
+  if (result.theme === 'dark') {
+    document.body.classList.add('dark');
+    themeToggle.innerHTML = moonSVG;
+  } else {
+    themeToggle.innerHTML = sunSVG;
+  }
+
+  requestAnimationFrame(() => {
+    document.body.classList.remove('no-transition');
+  });
 
   input.focus();
 });
@@ -91,7 +99,6 @@ input.addEventListener('keydown', function(e) {
     const text = input.value.trim();
     input.value = '';
 
-    // If first task of the day, store today's date
     if (taskList.children.length === 0) {
       container.classList.add('has-tasks');
       chrome.storage.sync.set({ todayDate: getToday() });
@@ -101,4 +108,11 @@ input.addEventListener('keydown', function(e) {
     saveTasks();
     input.focus();
   }
+});
+
+// Theme toggle
+themeToggle.addEventListener('click', () => {
+  const isDark = document.body.classList.toggle('dark');
+  themeToggle.innerHTML = isDark ? moonSVG : sunSVG;
+  chrome.storage.sync.set({ theme: isDark ? 'dark' : 'light' });
 });
