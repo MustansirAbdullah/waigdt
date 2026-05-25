@@ -2,20 +2,29 @@
 <html>
 <head>
   <title>waigdt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
 </head>
 <body>
-
+ 
 <div class="container" id="container">
   <div class="input-wrapper">
-    <input class="input-box" type="text" placeholder="What am I gonna do today?" id="taskInput" autocomplete="off" />
+    <input class="input-box" type="text" placeholder="What am i gonna do today" id="taskInput" autocomplete="off" />
   </div>
   <div class="tasks" id="taskList"></div>
   <span class="hint">press enter to add a task</span>
 </div>
-
+ 
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header"><span>History</span></div>
+  <div class="history-list" id="historyList"></div>
+</div>
+ 
+<button class="sidebar-toggle" id="sidebarToggle"></button>
 <button class="theme-toggle" id="themeToggle"></button>
-
+ 
 <script src="app.js"></script>
 </body>
 </html>
