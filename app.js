@@ -162,8 +162,10 @@ function createTask(text, done = false) {
     task.classList.toggle('done', isNowDone);
 
     if (isNowDone) {
-      taskList.appendChild(task);
-    }
+    taskList.appendChild(task);
+  } else {
+    taskList.insertBefore(task, taskList.querySelector('.task.done'));
+  }
 
     chrome.storage.local.get(['completedTasks'], (result) => {
       const completedTasks = result.completedTasks || [];
