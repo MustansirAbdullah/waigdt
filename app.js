@@ -213,7 +213,7 @@ function createTask(text, done = false) {
   task.appendChild(cb);
   task.appendChild(label);
   task.appendChild(deleteBtn);
-  taskList.appendChild(task);
+  taskList.insertBefore(task, taskList.querySelector('.task.done'));
 }
 
 // Load everything on page open
