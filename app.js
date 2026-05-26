@@ -23,15 +23,15 @@ function saveTasks() {
       done: task.classList.contains('done')
     });
   });
-  chrome.storage.sync.set({ tasks });
+  chrome.storage.local.set({ tasks });
 }
 
 function saveCompletedTasks(completedTasks) {
-  chrome.storage.sync.set({ completedTasks });
+  chrome.storage.local.set({ completedTasks });
 }
 
 function archiveTasks(date) {
-  chrome.storage.sync.get(['completedTasks', 'tasks', 'history'], (result) => {
+  chrome.storage.local.get(['completedTasks', 'tasks', 'history'], (result) => {
     const history = result.history || [];
     const completed = result.completedTasks || [];
     const activeTasks = result.tasks || [];
@@ -56,7 +56,7 @@ function archiveTasks(date) {
       });
     }
 
-    chrome.storage.sync.set({
+    chrome.storage.local.set({
       history,
       tasks: [],
       todayDate: null,
@@ -66,7 +66,7 @@ function archiveTasks(date) {
 }
 
 function renderHistory() {
-  chrome.storage.sync.get(['history'], (result) => {
+  chrome.storage.local.get(['history'], (result) => {
     const history = result.history || [];
     historyList.innerHTML = '';
 
@@ -139,9 +139,9 @@ function createTask(text, done = false) {
     const wasCompleted = task.classList.contains('done');
 
     if (!wasCompleted) {
-      chrome.storage.sync.get(['totalAdded'], (result) => {
+      chrome.storage.local.get(['totalAdded'], (result) => {
         const current = result.totalAdded || 0;
-        chrome.storage.sync.set({ totalAdded: Math.max(0, current - 1) });
+        chrome.storage.local.set({ totalAdded: Math.max(0, current - 1) });
       });
     }
 
@@ -165,7 +165,7 @@ function createTask(text, done = false) {
       taskList.appendChild(task);
     }
 
-    chrome.storage.sync.get(['completedTasks'], (result) => {
+    chrome.storage.local.get(['completedTasks'], (result) => {
       const completedTasks = result.completedTasks || [];
       if (isNowDone) {
         completedTasks.push(text);
@@ -219,7 +219,7 @@ function createTask(text, done = false) {
 // Load everything on page open
 document.body.classList.add('no-transition');
 
-chrome.storage.sync.get(['tasks', 'todayDate', 'theme'], (result) => {
+chrome.storage.local.get(['tasks', 'todayDate', 'theme'], (result) => {
   const saved = result.tasks || [];
   const savedDate = result.todayDate || null;
   const today = getToday();
@@ -255,12 +255,12 @@ input.addEventListener('keydown', function(e) {
 
     if (taskList.children.length === 0) {
       container.classList.add('has-tasks');
-      chrome.storage.sync.set({ todayDate: getToday() });
+      chrome.storage.local.set({ todayDate: getToday() });
     }
 
     createTask(text, false);
-    chrome.storage.sync.get(['totalAdded'], (result) => {
-      chrome.storage.sync.set({ totalAdded: (result.totalAdded || 0) + 1 });
+    chrome.storage.local.get(['totalAdded'], (result) => {
+      chrome.storage.local.set({ totalAdded: (result.totalAdded || 0) + 1 });
     });
     saveTasks();
     input.focus();
@@ -271,7 +271,7 @@ input.addEventListener('keydown', function(e) {
 themeToggle.addEventListener('click', () => {
   const isDark = document.body.classList.toggle('dark');
   themeToggle.innerHTML = isDark ? moonSVG : sunSVG;
-  chrome.storage.sync.set({ theme: isDark ? 'dark' : 'light' });
+  chrome.storage.local.set({ theme: isDark ? 'dark' : 'light' });
 });
 
 // Sidebar toggle
@@ -291,7 +291,7 @@ document.addEventListener('click', (e) => {
 
 // Check every minute if day has rolled over
 setInterval(() => {
-  chrome.storage.sync.get(['todayDate'], (result) => {
+  chrome.storage.local.get(['todayDate'], (result) => {
     if (result.todayDate && result.todayDate !== getToday()) {
       document.querySelectorAll('.task').forEach(task => {
         task.classList.add('expired');
