@@ -54,6 +54,7 @@ function archiveTasks(date) {
         percentage: Math.round((completedCount / total) * 100),
         tasks: allTasks
       });
+      if (history.length > 90) history.shift();
     }
 
     chrome.storage.local.set({
