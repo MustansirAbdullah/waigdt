@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Delius';
+  src: url('assets/Delius-Regular.ttf') format('truetype');
+}
+
 .no-transition * { transition: none !important; }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -239,7 +244,16 @@ body.dark .history-header:hover { background: #222; }
 .history-date { font-size: 0.85rem; color: #444; font-family: 'Delius', cursive; }
 body.dark .history-date { color: #aaa; }
 
-.history-pct { font-size: 0.85rem; font-family: 'Delius', cursive; color: #aaa; font-weight: bold; }
+.history-pct {
+  font-size: 0.85rem;
+  font-family: 'Delius', cursive;
+  color: #aaa;
+  font-weight: bold;
+  position: absolute;
+  right: 20px;
+  transition: opacity 0.2s;
+}
+
 .history-pct.perfect { color: #e74c3c; }
 
 .history-tasks { padding: 0 20px 12px; display: flex; flex-direction: column; gap: 6px; }
@@ -288,3 +302,40 @@ body.dark .sidebar-toggle:hover { border-color: #888; }
 .theme-toggle:hover { border-color: #aaa; }
 body.dark .theme-toggle { border-color: #444; color: #eee; }
 body.dark .theme-toggle:hover { border-color: #888; }
+
+/* History delete button */
+.history-delete-btn {
+  opacity: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s, color 0.2s;
+  flex-shrink: 0;
+  position: absolute;
+  right: 20px;
+}
+
+.history-header:hover .history-delete-btn {
+  opacity: 1; 
+}
+
+.history-header:hover .history-pct {
+  opacity: 0;
+}
+
+.history-delete-btn:hover {
+  color: #e74c3c; 
+}
+
+body.dark .history-delete-btn { 
+color: #555; 
+}
+
+body.dark .history-delete-btn:hover {
+color: #e74c3c;
+}
