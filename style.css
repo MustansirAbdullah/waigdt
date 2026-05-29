@@ -231,8 +231,8 @@ body.dark .history-item { border-bottom-color: #2a2a2a; }
 
 .history-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 8px;
   padding: 12px 20px;
   cursor: pointer;
   transition: background 0.15s;
@@ -241,7 +241,13 @@ body.dark .history-item { border-bottom-color: #2a2a2a; }
 .history-header:hover { background: #f9f9f9; }
 body.dark .history-header:hover { background: #222; }
 
-.history-date { font-size: 0.85rem; color: #444; font-family: 'Delius', cursive; }
+.history-date {
+  font-size: 0.85rem;
+  color: #444;
+  font-family: 'Delius', cursive;
+  flex: 1;
+}
+
 body.dark .history-date { color: #aaa; }
 
 .history-pct {
@@ -249,8 +255,6 @@ body.dark .history-date { color: #aaa; }
   font-family: 'Delius', cursive;
   color: #aaa;
   font-weight: bold;
-  position: absolute;
-  right: 20px;
   transition: opacity 0.2s;
 }
 
@@ -316,8 +320,6 @@ body.dark .theme-toggle:hover { border-color: #888; }
   justify-content: center;
   transition: opacity 0.2s, color 0.2s;
   flex-shrink: 0;
-  position: absolute;
-  right: 20px;
 }
 
 .history-header:hover .history-delete-btn {
