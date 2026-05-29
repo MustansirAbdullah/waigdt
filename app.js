@@ -96,7 +96,8 @@ function renderHistory() {
 
       const date = document.createElement('span');
       date.className = 'history-date';
-      date.textContent = entry.date;
+      const d = new Date(entry.date + 'T00:00:00');
+      date.textContent = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
       const pct = document.createElement('span');
       pct.className = 'history-pct' + (entry.percentage === 100 ? ' perfect' : '');
@@ -193,6 +194,8 @@ function createTask(text, done = false) {
         tick.play();
       }
       taskList.appendChild(task);
+    } else {
+      taskList.insertBefore(task, taskList.firstChild);
     }
 
     chrome.storage.local.get(['completedTasks'], (result) => {
@@ -243,7 +246,7 @@ function createTask(text, done = false) {
   task.appendChild(cb);
   task.appendChild(label);
   task.appendChild(deleteBtn);
-  taskList.appendChild(task);
+  taskList.insertBefore(task, taskList.firstChild);
 }
 
 // Load everything on page open
