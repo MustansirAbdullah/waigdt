@@ -339,3 +339,68 @@ color: #555;
 body.dark .history-delete-btn:hover {
 color: #e74c3c;
 }
+
+.settings-section {
+  border-top: 1px solid #eee;
+}
+
+body.dark .settings-section { border-top-color: #333; }
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-family: 'Delius', cursive;
+  color: #222;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  transition: background 0.15s;
+}
+
+.settings-header:hover { background: #f9f9f9; }
+body.dark .settings-header { color: #eee; }
+body.dark .settings-header:hover { background: #222; }
+
+.settings-chevron {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #aaa;
+}
+
+.settings-section.open .settings-chevron { transform: rotate(180deg); }
+
+.settings-body {
+  display: none;
+  padding: 4px 20px 16px;
+}
+
+.settings-section.open .settings-body { display: block; }
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.setting-label {
+  font-size: 0.82rem;
+  font-family: 'Delius', cursive;
+  color: #666;
+}
+
+body.dark .setting-label { color: #aaa; }
+
+.setting-color {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid #ddd;
+  padding: 2px;
+  cursor: pointer;
+  background: none;
+}
+
+body.dark .setting-color { border-color: #444; }
