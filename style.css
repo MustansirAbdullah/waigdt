@@ -404,3 +404,40 @@ body.dark .setting-label { color: #aaa; }
 }
 
 body.dark .setting-color { border-color: #444; }
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+}
+
+.toggle input { display: none; }
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: #ddd;
+  border-radius: 20px;
+  transition: background 0.2s;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 3px;
+  top: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.toggle input:checked + .toggle-slider { background: #222; }
+.toggle input:checked + .toggle-slider::before { transform: translateX(16px); }
+
+body.dark .toggle-slider { background: #444; }
+body.dark .toggle input:checked + .toggle-slider { background: #eee; }
+body.dark .toggle input:checked + .toggle-slider::before { background: #111; }

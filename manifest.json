@@ -12,5 +12,9 @@
       "id": "waigdt@mustansir.dev",
       "strict_min_version": "109.0"
     }
-  }
+  },
+  "web_accessible_resources": [{
+    "resources": ["assets/*"],
+    "matches": ["<all_urls>"]
+  }]
 }
