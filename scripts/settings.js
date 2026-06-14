@@ -24,14 +24,18 @@ function initTheme(savedTheme) {
     themeToggle.innerHTML = sunSVG;
   }
 
-  themeToggle.addEventListener('click', () => {
-    const isDark = document.body.classList.toggle('dark');
-    themeToggle.innerHTML = isDark ? moonSVG : sunSVG;
-    storageSet({ theme: isDark ? 'dark' : 'light' });
-    // Clear any custom bg colour so CSS variables take over
-    document.body.style.backgroundColor = '';
-    document.body.style.backgroundImage = '';
+themeToggle.addEventListener('click', () => {
+  const isDark = document.body.classList.toggle('dark');
+  themeToggle.innerHTML = isDark ? moonSVG : sunSVG;
+  storageSet({ 
+    theme: isDark ? 'dark' : 'light',
+    bgColor: null  // clear custom colour on theme switch
   });
+  document.body.style.backgroundColor = '';
+  document.body.style.backgroundImage = '';
+  document.body.style.backgroundSize = '';
+  bgColorPicker.value = isDark ? '#111111' : '#ffffff'; // reset picker to match theme
+});
 }
 
 function initBgColor(savedColor) {

@@ -120,36 +120,6 @@ function createTask(text, done = false) {
     saveTasks();
   });
 
-  label.addEventListener('dblclick', (e) => {
-    e.stopPropagation();
-    const renameInput = document.createElement('input');
-    renameInput.type = 'text';
-    renameInput.value = label.textContent;
-    renameInput.className = 'rename-input';
-    task.replaceChild(renameInput, label);
-    renameInput.focus();
-    renameInput.select();
-
-    let committed = false;
-
-    function commitRename() {
-      if (committed) return;
-      committed = true;
-      if (renameInput.value.trim() !== '') {
-        label.textContent = renameInput.value.trim();
-      }
-      task.replaceChild(label, renameInput);
-      saveTasks();
-    }
-
-    renameInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') commitRename();
-      if (e.key === 'Escape') task.replaceChild(label, renameInput);
-    });
-
-    renameInput.addEventListener('blur', commitRename);
-  });
-
   task.appendChild(cb);
   task.appendChild(label);
   task.appendChild(deleteBtn);

@@ -73,6 +73,7 @@ body {
   align-items: center;
   width: 580px;
   transition: var(--transition-smooth);
+  margin-top: -100px;
 }
 
 /* --- Input box --- */
@@ -122,4 +123,18 @@ body {
   opacity: 0;
   pointer-events: none;
   margin-top: 0;
+}
+
+#clock {
+  font-size: 6rem;
+  color: var(--text-main);
+  letter-spacing: 0.05em;
+  transition: var(--transition-smooth);
+  margin-bottom: 36px;
+}
+
+.has-tasks #clock {
+  font-size: 3rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
 }

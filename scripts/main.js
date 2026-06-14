@@ -48,6 +48,7 @@ async function init() {
   });
 
   input.focus();
+  startClock();
 }
 
 // --- Add task on Enter ---
@@ -87,6 +88,19 @@ document.addEventListener('click', (e) => {
 settingsToggle.addEventListener('click', () => {
   settingsSection.classList.toggle('open');
 });
+
+function startClock() {
+  const clock = document.getElementById('clock');
+  function tick() {
+    const now = new Date();
+    clock.textContent = now.toLocaleTimeString('en-GB', { 
+      hour: '2-digit', 
+      minute: '2-digit'
+    });
+  }
+  tick();
+  setInterval(tick, 1000);
+}
 
 // --- Day rollover check ---
 // Marks tasks expired if the user leaves the tab open past midnight
