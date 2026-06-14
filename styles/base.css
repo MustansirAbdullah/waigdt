@@ -135,6 +135,6 @@ body {
 
 .has-tasks #clock {
   font-size: 3rem;
-  color: var(--text-muted);
+  color: var(--text-main);
   margin-bottom: 12px;
 }
