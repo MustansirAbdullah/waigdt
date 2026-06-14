@@ -79,7 +79,7 @@ waigdt/
 
 ## Contributing
 
-PRs and issues welcome. Keep it minimal — if a feature would make this feel like a dashboard, it probably doesn't belong here.
+PRs and issues welcome. Keep it minimal but if a feature would make this feel like a dashboard, it probably doesn't belong here.
 
 ---
 
