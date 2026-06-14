@@ -16,5 +16,11 @@
   "web_accessible_resources": [{
     "resources": ["assets/*"],
     "matches": ["<all_urls>"]
-  }]
+  }],
+  "icons": {
+  "16": "assets/favicon.svg",
+  "32": "assets/favicon.svg",
+  "48": "assets/favicon.svg",
+  "128": "assets/favicon.svg"
+}
 }

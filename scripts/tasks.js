@@ -8,6 +8,7 @@ function saveTasks() {
   const tasks = [];
   document.querySelectorAll('.task').forEach(task => {
     tasks.push({
+      id:   task.dataset.id,
       text: task.querySelector('label').textContent,
       done: task.classList.contains('done')
     });
@@ -17,18 +18,18 @@ function saveTasks() {
 
 async function archiveTasks(date) {
   const result = await storageGet(['completedTasks', 'tasks', 'history']);
-  const history = result.history || [];
-  const completed = result.completedTasks || [];
-  const activeTasks = result.tasks || [];
-  const incomplete = activeTasks.filter(t => !t.done);
+  const history      = result.history       || [];
+  const completedIds = result.completedTasks || [];
+  const activeTasks  = result.tasks          || [];
 
-  const allTasks = [
-    ...completed.map(t => ({ text: t, done: true })),
-    ...incomplete.map(t => ({ text: t.text, done: false }))
-  ];
+  // Mark each active task done/not-done based on whether its ID is in completedIds
+  const allTasks = activeTasks.map(t => ({
+    text: t.text,
+    done: completedIds.includes(t.id)
+  }));
 
-  const total = allTasks.length;
-  const completedCount = completed.length;
+  const total          = allTasks.length;
+  const completedCount = completedIds.length;
 
   if (total > 0) {
     history.push({
@@ -48,25 +49,26 @@ async function archiveTasks(date) {
   });
 }
 
-function createTask(text, done = false) {
-  const taskList = document.getElementById('taskList');
+function createTask(text, done = false, savedId = null) {
+  const taskList  = document.getElementById('taskList');
   const container = document.getElementById('container');
 
   const task = document.createElement('div');
   task.className = 'task' + (done ? ' done' : '');
 
-  const id = crypto.randomUUID();
+  const id = savedId || crypto.randomUUID();
+  task.dataset.id = id;
 
   const cb = document.createElement('input');
-  cb.type = 'checkbox';
-  cb.id = id;
+  cb.type    = 'checkbox';
+  cb.id      = id;
   cb.checked = done;
 
-  const label = document.createElement('label');
-  label.htmlFor = id;
+  const label       = document.createElement('label');
+  label.htmlFor     = id;
   label.textContent = text;
 
-  const deleteBtn = document.createElement('button');
+  const deleteBtn     = document.createElement('button');
   deleteBtn.className = 'delete-btn';
   deleteBtn.innerHTML = trashSVG;
 
@@ -76,10 +78,14 @@ function createTask(text, done = false) {
     if (!wasCompleted) {
       const result = await storageGet(['totalAdded']);
       await storageSet({ totalAdded: Math.max(0, (result.totalAdded || 0) - 1) });
+    } else {
+      const result = await storageGet(['completedTasks']);
+      const completedTasks = (result.completedTasks || []).filter(i => i !== id);
+      await storageSet({ completedTasks });
     }
 
-    task.style.opacity = '0';
-    task.style.transform = 'translateX(20px)';
+    task.style.opacity    = '0';
+    task.style.transform  = 'translateX(20px)';
     task.style.transition = 'opacity 0.2s, transform 0.2s';
 
     setTimeout(() => {
@@ -106,13 +112,13 @@ function createTask(text, done = false) {
       taskList.insertBefore(task, taskList.firstChild);
     }
 
-    const result = await storageGet(['completedTasks']);
+    const result         = await storageGet(['completedTasks']);
     const completedTasks = result.completedTasks || [];
 
     if (isNowDone) {
-      completedTasks.push(text);
+      completedTasks.push(id);                                  // store ID not text
     } else {
-      const idx = completedTasks.lastIndexOf(text);
+      const idx = completedTasks.indexOf(id);                   // exact match by ID
       if (idx !== -1) completedTasks.splice(idx, 1);
     }
 
@@ -123,11 +129,10 @@ function createTask(text, done = false) {
   task.appendChild(cb);
   task.appendChild(label);
   task.appendChild(deleteBtn);
-  taskList.insertBefore(task, taskList.firstChild);
 
   if (done) {
-    taskList.appendChild(task); }      // completed → bottom
-  else {
-    taskList.insertBefore(task, taskList.firstChild); // active → top
-}
+    taskList.appendChild(task);
+  } else {
+    taskList.insertBefore(task, taskList.firstChild);
+  }
 }

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 680">
+  <style>
+    .clock-ring { fill: none; stroke: #000; stroke-width: 38; }
+    .tick { stroke: #000; stroke-linecap: round; }
+    .check { fill: none; stroke: #000; stroke-width: 52; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+  <g transform="translate(340,340)">
+    <circle class="clock-ring" r="295"/>
+    <line class="tick" x1="0" y1="-248" x2="0" y2="-220" stroke-width="10"/>
+    <line class="tick" x1="124" y1="-215" x2="110" y2="-191" stroke-width="10"/>
+    <line class="tick" x1="215" y1="-124" x2="191" y2="-110" stroke-width="10"/>
+    <line class="tick" x1="248" y1="0" x2="220" y2="0" stroke-width="10"/>
+    <line class="tick" x1="215" y1="124" x2="191" y2="110" stroke-width="10"/>
+    <line class="tick" x1="124" y1="215" x2="110" y2="191" stroke-width="10"/>
+    <line class="tick" x1="0" y1="248" x2="0" y2="220" stroke-width="10"/>
+    <line class="tick" x1="-124" y1="215" x2="-110" y2="191" stroke-width="10"/>
+    <line class="tick" x1="-215" y1="124" x2="-191" y2="110" stroke-width="10"/>
+    <line class="tick" x1="-248" y1="0" x2="-220" y2="0" stroke-width="10"/>
+    <line class="tick" x1="-215" y1="-124" x2="-191" y2="-110" stroke-width="10"/>
+    <line class="tick" x1="-124" y1="-215" x2="-110" y2="-191" stroke-width="10"/>
+    <polyline class="check" points="-120,10 -18,90 150,-90" fill="none"/>
+  </g>
+</svg>

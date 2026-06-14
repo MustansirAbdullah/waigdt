@@ -31,7 +31,7 @@ async function init() {
     await archiveTasks(savedDate);
   } else if (saved.length > 0) {
     container.classList.add('has-tasks');
-    saved.forEach(t => createTask(t.text, t.done));
+    saved.forEach(t => createTask(t.text, t.done, t.id));
   }
 
   // Set static button icons
@@ -63,7 +63,7 @@ input.addEventListener('keydown', async (e) => {
     await storageSet({ todayDate: getToday() });
   }
 
-  createTask(text, false);
+  createTask(text, false, null);
 
   const result = await storageGet(['totalAdded']);
   await storageSet({ totalAdded: (result.totalAdded || 0) + 1 });
@@ -103,15 +103,12 @@ function startClock() {
 }
 
 // --- Day rollover check ---
-// Marks tasks expired if the user leaves the tab open past midnight
 const rolloverInterval = setInterval(async () => {
   const result = await storageGet(['todayDate']);
   if (result.todayDate && result.todayDate !== getToday()) {
     clearInterval(rolloverInterval);
-    document.querySelectorAll('.task').forEach(task => {
-      task.classList.add('expired');
-      task.querySelector('input[type="checkbox"]').disabled = true;
-    });
+    await archiveTasks(result.todayDate);
+    location.reload();
   }
 }, 60000);
 
