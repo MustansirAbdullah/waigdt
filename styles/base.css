@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'Delius';
-  src: url('../assets/Delius-Regular.ttf') format('truetype');
+  src: url('https://fonts.googleapis.com/css2?family=Delius&display=swap') format('truetype');
 }
 
 /* --- Variables --- */

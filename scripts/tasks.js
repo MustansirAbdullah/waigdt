@@ -124,4 +124,10 @@ function createTask(text, done = false) {
   task.appendChild(label);
   task.appendChild(deleteBtn);
   taskList.insertBefore(task, taskList.firstChild);
+
+  if (done) {
+    taskList.appendChild(task); }      // completed → bottom
+  else {
+    taskList.insertBefore(task, taskList.firstChild); // active → top
+}
 }
