@@ -1,0 +1,125 @@
+/* ==========================================================================
+   BASE — Variables, resets, body, input box, hint
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Delius';
+  src: url('../assets/Delius-Regular.ttf') format('truetype');
+}
+
+/* --- Variables --- */
+:root {
+  --font-main: 'Delius', cursive;
+  --transition-smooth: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.2s ease;
+
+  /* Light mode */
+  --bg-color: #ffffff;
+  --bg-grid: #c4c4c4;
+  --bg-panel: rgba(255, 255, 255, 0.92);
+  --bg-panel-done: rgba(248, 248, 248, 0.92);
+  --border-color: #ddd;
+  --border-subtle: #eee;
+  --text-main: #222;
+  --text-muted: #ccc;
+  --text-subtle: #aaa;
+  --text-mid: #888;
+  --accent-danger: #e74c3c;
+}
+
+body.dark {
+  /* Dark mode overrides */
+  --bg-color: #111;
+  --bg-grid: #333;
+  --bg-panel: rgba(30, 30, 30, 0.95);
+  --bg-panel-done: rgba(20, 20, 20, 0.95);
+  --border-color: #333;
+  --border-subtle: #222;
+  --text-main: #eee;
+  --text-muted: #555;
+  --text-subtle: #555;
+  --text-mid: #666;
+}
+
+/* --- Resets --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.no-transition * {
+  transition: none !important;
+}
+
+/* --- Body --- */
+body {
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  background-image: radial-gradient(var(--bg-grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-main);
+  overflow-y: auto;
+}
+
+/* --- Container --- */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 580px;
+  transition: var(--transition-smooth);
+}
+
+/* --- Input box --- */
+.input-wrapper {
+  width: 100%;
+  transition: var(--transition-smooth);
+}
+
+.input-box {
+  width: 100%;
+  padding: 36px;
+  font-size: 2.6rem;
+  font-family: inherit;
+  color: var(--text-main);
+  background: var(--bg-panel);
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  outline: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.06);
+  transition: var(--transition-smooth);
+}
+
+.input-box::placeholder { color: var(--text-muted); }
+.input-box:focus { border-color: var(--text-subtle); box-shadow: 0 4px 40px rgba(0, 0, 0, 0.1); }
+
+.container.has-tasks .input-box {
+  padding: 18px 24px;
+  font-size: 1.4rem;
+  border-radius: 6px 6px 0 0;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+/* --- Hint --- */
+.hint {
+  margin-top: 14px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  transition: opacity 0.3s;
+}
+
+.container.has-tasks .hint {
+  opacity: 0;
+  pointer-events: none;
+  margin-top: 0;
+}

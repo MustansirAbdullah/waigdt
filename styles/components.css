@@ -1,0 +1,182 @@
+/* ==========================================================================
+   COMPONENTS — Tasks, checkboxes, delete buttons, toggle switches, animations
+   ========================================================================== */
+
+/* --- Animations --- */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Task list --- */
+.tasks {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  background: var(--bg-panel);
+  border: 2px solid var(--border-color);
+  border-top: 1px solid var(--border-subtle);
+  animation: slideIn 0.3s ease;
+  transition: background 0.2s;
+  position: relative;
+}
+
+.task:last-child {
+  border-radius: 0 0 6px 6px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.task.done { background: var(--bg-panel-done); }
+body.dark .task { border-top-color: var(--border-subtle); }
+
+/* --- Checkboxes --- */
+.task input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--text-muted);
+  border-radius: 50%;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: var(--transition-fast);
+  position: relative;
+}
+
+.task input[type="checkbox"]:checked {
+  background: var(--text-main);
+  border-color: var(--text-main);
+}
+
+.task input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 9px;
+  border: 2px solid var(--bg-color);
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+/* --- Task labels --- */
+.task label {
+  font-size: 1.05rem;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.3s;
+  flex: 1;
+}
+
+.task.done label {
+  text-decoration: line-through;
+  color: var(--text-subtle);
+}
+
+/* --- Rename input --- */
+.rename-input {
+  font-size: 1.05rem;
+  font-family: inherit;
+  color: var(--text-main);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--text-muted);
+  outline: none;
+  flex: 1;
+}
+
+/* --- Expired state --- */
+.task.expired {
+  opacity: 0.4;
+}
+
+.task.expired,
+.task.expired * {
+  cursor: not-allowed;
+}
+
+/* --- Delete button (tasks) --- */
+.delete-btn {
+  opacity: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+
+.task:hover .delete-btn { opacity: 1; }
+.delete-btn:hover { color: var(--accent-danger); }
+
+/* --- Floating buttons (sidebar toggle + theme toggle) --- */
+.sidebar-toggle,
+.theme-toggle {
+  position: fixed;
+  background: none;
+  border: 1.5px solid var(--border-color);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+  transition: all 0.3s;
+}
+
+.sidebar-toggle { bottom: 76px; right: 24px; }
+.theme-toggle   { bottom: 24px;  right: 24px; }
+
+.sidebar-toggle:hover,
+.theme-toggle:hover { border-color: var(--text-subtle); }
+
+/* --- Toggle switches --- */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+}
+
+.toggle input { display: none; }
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: var(--border-color);
+  border-radius: 20px;
+  transition: background 0.2s;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 3px;
+  top: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.toggle input:checked + .toggle-slider { background: var(--text-main); }
+.toggle input:checked + .toggle-slider::before {
+  transform: translateX(16px);
+  background: var(--bg-color);
+}

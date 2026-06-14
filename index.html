@@ -2,10 +2,11 @@
 <html>
 <head>
   <title>waigdt</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/sidebar.css">
 </head>
 <body>
 
@@ -23,16 +24,18 @@
   <div class="settings-section" id="settingsSection">
     <div class="settings-header" id="settingsToggle"></div>
     <div class="settings-body" id="settingsBody">
-      <div class="setting-row">
-        <span class="setting-label">Background colour</span>
-        <input type="color" class="setting-color" id="bgColorPicker" value="#ffffff">
-      </div>
-      <div class="setting-row">
-        <span class="setting-label">Sound effects</span>
+      <div class="settings-body-inner">
+        <div class="setting-row">
+          <span class="setting-label">Background colour</span>
+          <input type="color" class="setting-color" id="bgColorPicker" value="#ffffff">
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Sound effects</span>
           <label class="toggle">
-          <input type="checkbox" id="soundToggle" checked>
-        <span class="toggle-slider"></span>
-        </label>
+            <input type="checkbox" id="soundToggle" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
       </div>
     </div>
   </div>
@@ -41,6 +44,12 @@
 <button class="sidebar-toggle" id="sidebarToggle"></button>
 <button class="theme-toggle" id="themeToggle"></button>
 
-<script src="app.js"></script>
+<!-- Scripts load in dependency order -->
+<script src="scripts/storage.js"></script>
+<script src="scripts/tasks.js"></script>
+<script src="scripts/history.js"></script>
+<script src="scripts/settings.js"></script>
+<script src="scripts/main.js"></script>
+
 </body>
 </html>
