@@ -61,8 +61,6 @@ A clean, distraction-free new tab page that keeps your daily tasks front and cen
 ---
 
 
----
-
 ## Contributing
 
 PRs and issues welcome. Keep it minimal but if a feature would make this feel like a dashboard, it probably doesn't belong here.
