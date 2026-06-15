@@ -60,24 +60,6 @@ A clean, distraction-free new tab page that keeps your daily tasks front and cen
 
 ---
 
-## Project structure
-
-```
-waigdt/
-├── assets/          # Font, sound, icons, screenshots
-├── scripts/
-│   ├── storage.js   # chrome.storage wrappers
-│   ├── tasks.js     # Task creation and management
-│   ├── history.js   # History rendering
-│   ├── settings.js  # Theme, sound, background colour
-│   └── main.js      # Init and event listeners
-├── styles/
-│   ├── base.css     # Variables, resets, layout
-│   ├── components.css  # Tasks, buttons, toggles
-│   └── sidebar.css  # Sidebar, history, settings
-├── index.html
-└── manifest.json
-```
 
 ---
 
