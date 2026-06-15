@@ -4,7 +4,11 @@
 
 A clean, distraction-free new tab page that keeps your daily tasks front and center and focuses on accounability. No accounts, no sync, no tracking. Just your tasks and you to blame.
 
-![waigdt screenshot](assets/Screenshot3.png)
+
+
+https://github.com/user-attachments/assets/1a49b8de-ba30-427b-bb0f-b05c58aa9de1
+
+
 
 ---
 
